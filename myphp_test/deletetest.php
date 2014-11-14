@@ -17,7 +17,7 @@ class deletetest extends PHPUnit_Framework_TestCase
 		
 		$clickbutton = new clickButton();
 		$dummypicture = $this->getMock('PICS');
-		$this->assrtTrue($Delete->deletingPicture($clickutton,$dummypicture));
+		$this->assrtTrue($Delete->deletingPicture($clickbutton,$dummypicture));
     }
 	
 }

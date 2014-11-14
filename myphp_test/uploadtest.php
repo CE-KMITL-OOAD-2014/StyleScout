@@ -1,7 +1,6 @@
 <?php
 require_once 'uploadpic.php';
 include '../upload.html';
-
 foreach (scandir(dirname(_FILE_).'/upload')as $filename){
 	$path = dirname(_FILE_).'/upload/' . $filename;
 	if(is_file($path)){
@@ -17,7 +16,7 @@ class uploadtest extends PHPUnit_Framework_TestCase
 		
 		$clickbutton = new clickButton();
 		$dummypicture = $this->getMock('PICS');
-		$this->assrtTrue($Upload->uploadingPicture($clickutton,$dummypicture));
+		$this->assrtTrue($Upload->uploadingPicture($clickbutton,$dummypicture));
     }
 	
 }
