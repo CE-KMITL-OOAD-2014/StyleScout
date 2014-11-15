@@ -1,5 +1,5 @@
 <?php
-require_once 'deletepic.php';
+require_once 'ImageController.php';
 include '../delete.html';
 
 foreach (scandir(dirname(_FILE_).'/delete')as $filename){
@@ -13,11 +13,11 @@ class deletetest extends PHPUnit_Framework_TestCase
 {
     public function tesITCanDeletePic()
     {
-        $Delete = new deletepic();
+        $Delete = new deleteimage();
 		
 		$clickbutton = new clickButton();
-		$dummypicture = $this->getMock('PICS');
-		$this->assrtTrue($Delete->deletingPicture($clickbutton,$dummypicture));
+		$dummypicture = $this->getMock('images');
+		$this->assertTrue($Delete->deletingPicture($clickbutton,$dummypicture));
     }
 	
 }

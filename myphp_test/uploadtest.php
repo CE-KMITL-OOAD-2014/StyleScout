@@ -1,23 +1,24 @@
 <?php
-require_once 'uploadpic.php';
-include '../upload.html';
-foreach (scandir(dirname(_FILE_).'/upload')as $filename){
-	$path = dirname(_FILE_).'/upload/' . $filename;
-	if(is_file($path)){
-		require_once $path;
-	}
-}
+
+require_once 'ImageController.php'; 
+include_once '../upload.html';
+
 class uploadtest extends PHPUnit_Framework_TestCase
-		public $test;
 {
-    public function tesITCanUploadPic()
-    {
-        $Upload = new uploadpic();
-		
-		$clickbutton = new clickButton();
-		$dummypicture = $this->getMock('PICS');
-		$this->assrtTrue($Upload->uploadingPicture($clickbutton,$dummypicture));
-    }
-	
+   public static function mockImage($hashtag,$caption,$images){
+   
+		$image= new Images();
+		$image->images($images);
+		$image->hashtag($hahtag);
+		$image->caption($caption);
+		return $image;
+   }
+   public function testAdd(){
+		$mock = uploadtest::mockImage('testHashtag','testCaption','testImage');
+		$this->assertTrue('testImage',$result->images);
+		$this->assertEquals('testHashtag',$result->hahtag);
+		$this->assertEquals('testCaption',$result->caption);
+
+   }
 }
 ?>
