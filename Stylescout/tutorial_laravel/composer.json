@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"way/generators":"~2.0",
-		 "filp/whoops":"~1.0"
+		 "filp/whoops":"~1.0",
+		 "intervention/image"
 	},
 	"autoload": {
 		"classmap": [

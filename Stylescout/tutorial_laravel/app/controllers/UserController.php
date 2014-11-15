@@ -13,7 +13,6 @@ class UserController extends  BaseController{
 
         $v = Validator::make($input,$rule);
 
-    
         if($v->passes()){
        $password = Input::get('password');
         $password = Hash::make($password);
@@ -21,6 +20,9 @@ class UserController extends  BaseController{
         $user->username = Input::get('username');
         $user->password = $password;
         $user->email = Input::get('email');
+        $user->contact = 'Add your contact...';
+        $user->bio = 'Add more descriptions...';
+        $user->profile_pic = "assets/bootstrap/public.jpg";
         $user->save();
        return  Redirect::to('/login');
 	   }
@@ -28,7 +30,8 @@ class UserController extends  BaseController{
        return  Redirect::to('/')->withInput()->withErrors($v);
 }
 }
-    
+ 
+
    protected function login(){
       $input = Input::all();
       $rule = array(
@@ -43,23 +46,58 @@ class UserController extends  BaseController{
           'username'=>Input::get('username'),
           'password'=>Input::get('password')
           );
-        //$authUser = tbl::where('username', '=', Input::get('username'))->first();
-        //$authPass = tbl::where('password', '=', Hash::make(Input::get('password')))->first();
+          
             if(Auth::attempt($data)){
-               return Redirect::to('/profile');
-           } else {
-
+                if(Auth::user()->Type == 1){
+                   return 'hi admin';
+                  } 
+                 elseif(Auth::user()->Type == 0) {
+                   return Redirect::to('profile');
+                  }
+           else {
                return Redirect::to('/login');
              }
-        } 
+      }
+    }
+}
 
-   }
 
 
-    protected function editProfile(){}
+    protected function showProfile(){
+      $thatMember = Auth::user();
+       return View::make('/profile')->with('user',$thatMember);
+    }
+
+
+
+    protected function getEditProfile(){
+      $user = Auth::user();
+      return View::make('editProfile')->with('user',$user);
+    }
+
+
+
+
+
+    protected function edit(){
+       $user = Auth::user();
+       $user->contact = Input::get('contact');
+       $user->bio = Input::get('bio');
+       if(Input::file('profilepic')!=NULL){
+        $destinationPath = 'assets/bootstrap/image';
+        $filename = Input::file('profilepic')->getClientOriginalName();
+        Input::file('profilepic')->move($destinationPath,$filename);
+        $user->profile_pic = $destinationPath.'/'.$filename;
+       }
+       $user->save();
+       return Redirect::to('profile');
+    }
+
+
+
     protected function logout(){
         Auth::logout();
-        return Redirect::to('/');
+        return Redirect::Intended('/');
     }
  
 

@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => 'Don't to know it man!',
+	'password' => 'assignment/3D',
 
 	/*
 	|--------------------------------------------------------------------------

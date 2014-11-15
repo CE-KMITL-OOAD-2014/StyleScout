@@ -11,7 +11,7 @@
 |
 */
 Route::get('/',function(){
-	return View::make('home');
+	return View::make('index');
 });
  
 Route::get('/login',function(){
@@ -23,13 +23,37 @@ Route::get('/register',function(){
    return View::make('registration');
 });
 
-Route::get('/profile',function(){
-	return View::make('profile');
+
+
+Route::get('/upload',array(
+	'before' => 'checkAuth',
+	function()
+	{
+	return View::make('uploada');
+}));
+
+
+Route::get('history',function(){
+	return View::make('history');
 });
 
+
+Route::get('history/dandy.jpg',function(){
+
+	return View::make('show');
+});
+
+Route::get('delete/{name}','ImageController@delete');
+
+Route::get('hashtag/{id}','HashtagController@showHashtagPic');
+Route::get('hashtag','HashtagController@getHashtag');
+Route::get('edit','UserController@getEditProfile');
+Route::post('edit','UserController@edit');
+Route::get('/profile','UserController@showProfile');
+Route::post('upload','ImageController@add');
 Route::post('/registered','UserController@signUp');
 Route::post('login','UserController@login');
-Route::post('/logout','UserController@logout');
+Route::get('/logout','UserController@logout');
 
 Route::get('mail/', function()
 {

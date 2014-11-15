@@ -9,14 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PROFILE</title>
+    <title>HashtagLists</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="assets/bootstrap/css/portfolio-item.css" rel="stylesheet">
-    
+    <link href="assets/bootstrap/css/round-hashtag.css" rel="stylesheet">
+	
+	
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -40,37 +42,28 @@
                     <span class="icon-bar"></span>
 					<span class="glyphicon glyphicon-log-out"></span>
 					<span class="glyphicon glyphicon-upload"></span>
-
-					
                 </button>
 				
-                <a class="navbar-brand" href="blank.php">STYLESCOUTAPP</a>
+				
+                <a class="navbar-brand" href="blank.html">STYLESCOUTAPP</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="About.html">About</a>
-                    </li>
-                    <li>
                         <a href="profile">Profile </a>
                     </li>
                     <li>
-                         <a href="hashtag">HashtagList </a>
+                        <a href="HashtagList">HashtagList </a>
+                    </li>
+                    <li>
+                        <a href="About">About</a>
                     </li>
 					<li>
-						<a href="history">History </a>
-					</li>
-					
-					<li>
-						<a href="edit">Edit Profile </a>
+						<a class="glyphicon glyphicon-log-out" href="logout"> Signout </a>
 					</li>
 					<li>
 						<a class="glyphicon glyphicon-upload" href="upload">  </a>
-					</li>
-                    
-					<li>
-						<a class="glyphicon glyphicon-log-out" href="logout"> Signout </a>
 					</li>
                 </ul>
             </div>
@@ -81,78 +74,44 @@
 
     <!-- Page Content -->
     <div class="container">
-
-        <!-- Portfolio Item Heading -->
+<a href="index.html">Home </a> || <a href="hashtag">HashtagList </a>
+        <!-- Introduction Row -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">PROFILE
-                    <small> {{$user->username}}</small>
+                <h1 class="page-header">HashtagList
+                    <small>It's Nice to Meet You!</small>
                 </h1>
+               
             </div>
         </div>
-        <!-- /.row -->
 
-        <!-- Portfolio Item Row -->
+
+        <!-- Team Members Row -->
         <div class="row">
-
-            <div class="col-md-8">
-                <img class="img-responsive" src="{{$user->profile_pic}}" alt="">
-            </div>
-
-            <div class="col-md-4">
-                <h3>Profile  Contact</h3>
-                <p>{{$user->contact}}</p>
-                <h3>Details</h3>
-                <ul>
-                    <li>{{$user->bio}}</li>
-                </ul>
-            </div>
-
-        </div>
-        <!-- /.row -->
-
-        <!-- Related  Row -->
-        <div class="row">
-
             <div class="col-lg-12">
-                <h3 class="page-header">Related</h3>
+                <h2 class="page-header">Categories</h2>
             </div>
+            @foreach($tag as $hashtag)
 
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="" onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="assets/bootstrap/image/upload/dandy.jpg" alt="">
+                <h3>{{$hashtag->hashtag}}
+					<button class="btn" onclick ="window.location='{{url('/hashtag')}}'+'/'+'{{$hashtag->id}}'">{{$hashtag->hashtag}}</button>
+				
+                </h3>
+                <p>{{$hashtag->caption}}</p>
             </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
+        
+     @endforeach       
+         
         <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
+                    <p></p>
                     <p>Copyright &copy; Your Website 2014</p>
                 </div>
+                <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
         </footer>

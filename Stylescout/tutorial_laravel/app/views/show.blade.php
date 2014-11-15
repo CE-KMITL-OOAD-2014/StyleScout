@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PROFILE</title>
+    <title></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,6 +28,11 @@
 </head>
 
 <body>
+
+<?php 
+
+$image = Image::where('name','=','dandy.jpg')->first();
+?>
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -86,7 +92,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">PROFILE
-                    <small> {{$user->username}}</small>
+                    <small> {{$image->username}}</small>
                 </h1>
             </div>
         </div>
@@ -96,15 +102,18 @@
         <div class="row">
 
             <div class="col-md-8">
-                <img class="img-responsive" src="{{$user->profile_pic}}" alt="">
+                <img class="img-responsive" src="{{$image->path}}" alt="">
             </div>
 
             <div class="col-md-4">
-                <h3>Profile  Contact</h3>
-                <p>{{$user->contact}}</p>
+                <h3>Profile & Contact</h3>
+                <p>{{$image->caption}}</p>
                 <h3>Details</h3>
                 <ul>
-                    <li>{{$user->bio}}</li>
+                    <li>Lorem Ipsum</li>
+                    <li>Dolor Sit Amet</li>
+                    <li>Consectetur</li>
+                    <li>Adipiscing Elit</li>
                 </ul>
             </div>
 

@@ -32,6 +32,16 @@
      <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+					<span class="glyphicon glyphicon-log-out"></span>
+					<span class="glyphicon glyphicon-upload"></span>
+
+					
+                </button>
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -70,7 +80,7 @@
 
     <!-- Put your page content here! -->
 
-   <center><img src="assets/bootstrap/abc.jpg"> </center>
+   <center><img src="assets/bootstrap/store.jpg" /></center>
    
 
 </body>

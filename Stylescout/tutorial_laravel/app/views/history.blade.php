@@ -9,14 +9,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PROFILE</title>
+    <title>User History</title>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="assets/bootstrap/css/portfolio-item.css" rel="stylesheet">
-    
+    <link href="assets/bootstrap/css/4-col-portfolio.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -28,7 +29,8 @@
 
 <body>
 
-    <!-- Navigation -->
+	
+   <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -38,13 +40,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-					<span class="glyphicon glyphicon-log-out"></span>
+					<span class="glyphicon glyphicon-log-out" > </span>
 					<span class="glyphicon glyphicon-upload"></span>
 
 					
                 </button>
 				
-                <a class="navbar-brand" href="blank.php">STYLESCOUTAPP</a>
+                <a class="navbar-brand" href="blank.html">STYLESCOUTAPP</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -53,25 +55,18 @@
                         <a href="About.html">About</a>
                     </li>
                     <li>
-                        <a href="profile">Profile </a>
+                        <a href="profile">Profile</a>
                     </li>
                     <li>
                          <a href="hashtag">HashtagList </a>
                     </li>
 					<li>
-						<a href="history">History </a>
-					</li>
-					
-					<li>
-						<a href="edit">Edit Profile </a>
+						<a class="glyphicon glyphicon-log-out" href="logout"> Signout </a>
 					</li>
 					<li>
 						<a class="glyphicon glyphicon-upload" href="upload">  </a>
 					</li>
-                    
-					<li>
-						<a class="glyphicon glyphicon-log-out" href="logout"> Signout </a>
-					</li>
+					
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -82,66 +77,80 @@
     <!-- Page Content -->
     <div class="container">
 
-        <!-- Portfolio Item Heading -->
+<?php
+$a = 1;
+$username = Auth::user()->username;
+$images = Image::where('username','=',$username)->get();
+
+?>
+        <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">PROFILE
-                    <small> {{$user->username}}</small>
+
+			<p><br></p>
+			
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+			<p>
+                <h1 class="page-header">{{$username}}
+                    <small>Let's see what you've been uploaded ! Shall we?</small>
                 </h1>
+			</p>
             </div>
         </div>
         <!-- /.row -->
 
-        <!-- Portfolio Item Row -->
+
+@foreach ($images as $image)
+    
+        <!-- Projects Row -->
+        @if($a%4==1)
         <div class="row">
+            @endif
+           <div class="col-md-3 portfolio-item">
+                <a href="{{url('/history')}}/{{$image->name}}">
+                    <img class="img-responsive " src="{{$image->path}}" alt=""> 
+             <span class="pull-right"><button><a class="glyphicon glyphicon-trash" href = "delete/{{$image->name}}" onCLick="return confirm('Are you SURE you want to delete this record?')" ></button></a></span>   
+                    
+                 </a>
+           </div>
 
-            <div class="col-md-8">
-                <img class="img-responsive" src="{{$user->profile_pic}}" alt="">
-            </div>
+        @if($a%4==0)
+        </div> 
+        @endif
+       <?php $a++?>
+@endforeach
+        <!-- /.row -->
 
-            <div class="col-md-4">
-                <h3>Profile  Contact</h3>
-                <p>{{$user->contact}}</p>
-                <h3>Details</h3>
-                <ul>
-                    <li>{{$user->bio}}</li>
+
+        <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">&raquo;</a>
+                    </li>
                 </ul>
             </div>
-
-        </div>
-        <!-- /.row -->
-
-        <!-- Related  Row -->
-        <div class="row">
-
-            <div class="col-lg-12">
-                <h3 class="page-header">Related</h3>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="" onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
         </div>
         <!-- /.row -->
 
@@ -161,11 +170,12 @@
     <!-- /.container -->
 
     <!-- jQuery Version 1.11.0 -->
-    <script src="assets/bootstrap/js/jquery-1.11.0.js"></script>
+    <script src="js/jquery-1.11.0.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="js/bootstrap.min.js"></script>
+	
+	<body background="cr.jpg">
 </body>
 
 </html>
