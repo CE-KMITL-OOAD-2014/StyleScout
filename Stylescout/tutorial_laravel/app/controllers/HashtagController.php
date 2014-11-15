@@ -11,7 +11,7 @@ class HashtagController extends  BaseController{
       Input::file('pic')->move($destinationPath,$filename);
       $tag->pic = $destinationPath.'/'.$filename;
       $tag->save();
-     // return 
+      return Redirect::to('portfolio');
 	}
     
     protected function getHashtag(){

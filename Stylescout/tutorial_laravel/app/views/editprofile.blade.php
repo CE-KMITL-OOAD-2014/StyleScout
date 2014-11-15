@@ -67,7 +67,7 @@
     <br></br>
 	<center>Contact:<br> <input type="text" name="contact" value="{{$user->contact}}" style="margin:20px; padding:20px; "></center>
 	<p>
-	<center>Bio:<br> <textarea style="resize: none;" rows="4" cols="50" name = "bio" ></textarea></center>
+	<center>Bio:<br> <textarea style="resize: none;" rows="4" cols="50" name = "bio" value = "{{$user->bio}}" ></textarea></center>
 	</p>
 
 <center><p> Choose Profile Picture</p></center>

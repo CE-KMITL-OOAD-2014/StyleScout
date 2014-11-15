@@ -111,9 +111,10 @@ $images = Image::where('username','=',$username)->get();
            <div class="col-md-3 portfolio-item">
                 <a href="{{url('/history')}}/{{$image->name}}">
                     <img class="img-responsive " src="{{$image->path}}" alt=""> 
+                 </a>   
              <span class="pull-right"><button><a class="glyphicon glyphicon-trash" href = "delete/{{$image->name}}" onCLick="return confirm('Are you SURE you want to delete this record?')" ></button></a></span>   
-                    
-                 </a>
+             <span class="pull-right"><button><a class="glyphicon glyphicon-thumbs-down" href = "report/{{$image->name}}" onCLick="return confirm('Do you want to report this picture ?')" ></button></a></span>       
+                 
            </div>
 
         @if($a%4==0)

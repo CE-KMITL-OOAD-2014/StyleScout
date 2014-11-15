@@ -49,9 +49,10 @@ class UserController extends  BaseController{
           
             if(Auth::attempt($data)){
                 if(Auth::user()->Type == 1){
-                   return 'hi admin';
+                  $check = Auth::user()->Type;
+                   return Redirect::to('manage')->with('check',$check);
                   } 
-                 elseif(Auth::user()->Type == 0) {
+                 else if(Auth::user()->Type == 0) {
                    return Redirect::to('profile');
                   }
            else {
@@ -74,9 +75,6 @@ class UserController extends  BaseController{
       $user = Auth::user();
       return View::make('editProfile')->with('user',$user);
     }
-
-
-
 
 
     protected function edit(){

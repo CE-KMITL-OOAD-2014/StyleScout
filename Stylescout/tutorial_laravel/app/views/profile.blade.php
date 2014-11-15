@@ -100,8 +100,10 @@
             </div>
 
             <div class="col-md-4">
-                <h3>Profile  Contact</h3>
-                <p>{{$user->contact}}</p>
+                <h3>Profile & Contact</h3>
+                <ul>
+                <li>{{$user->contact}}</li>
+                </ul>
                 <h3>Details</h3>
                 <ul>
                     <li>{{$user->bio}}</li>

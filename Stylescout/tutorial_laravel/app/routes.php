@@ -23,8 +23,6 @@ Route::get('/register',function(){
    return View::make('registration');
 });
 
-
-
 Route::get('/upload',array(
 	'before' => 'checkAuth',
 	function()
@@ -44,7 +42,6 @@ Route::get('history/dandy.jpg',function(){
 });
 
 Route::get('delete/{name}','ImageController@delete');
-
 Route::get('hashtag/{id}','HashtagController@showHashtagPic');
 Route::get('hashtag','HashtagController@getHashtag');
 Route::get('edit','UserController@getEditProfile');
@@ -54,6 +51,7 @@ Route::post('upload','ImageController@add');
 Route::post('/registered','UserController@signUp');
 Route::post('login','UserController@login');
 Route::get('/logout','UserController@logout');
+Route::get('report/{name}/','ImageController@report');
 
 Route::get('mail/', function()
 {
@@ -69,4 +67,15 @@ Route::get('mail/', function()
 
 	return 'done';
 	//return View::make('hello');
+});
+
+Route::get('portfolio',function(){
+    return View::make('portfolio');
+});
+Route::post('manage','HashtagController@addHashtag');
+Route::get('manage',function(){
+	if(Auth::user()->Type==0){
+		return Redirect::to('profile');
+	}
+	else {return View::make('manage');}
 });

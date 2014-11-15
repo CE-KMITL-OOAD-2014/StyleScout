@@ -35,4 +35,11 @@ protected function showPicTag(){
     
 }
 
+protected function report($name){
+    $new = Image::where('name','=',$name)->first();
+    $new->report++;
+    var_dump($new->report);
+    $new->save();
+    // return Redirect::to('history');
+}
 }
