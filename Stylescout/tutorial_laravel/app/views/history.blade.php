@@ -46,25 +46,25 @@
 					
                 </button>
 				
-                <a class="navbar-brand" href="blank.html">STYLESCOUTAPP</a>
+                <a class="navbar-brand" >STYLESCOUTAPP</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="About.html">About</a>
+         <li>
+                        <a href="{{asset(url('/aboutus'))}}"><font color="Snow">About</font></a>
                     </li>
                     <li>
-                        <a href="profile">Profile</a>
+                        <a href="{{asset(url('/profile'))}}"><font color="Snow">Profile</font></a>
                     </li>
                     <li>
-                         <a href="hashtag">HashtagList </a>
+                         <a href="{{asset(url('/hashtag'))}}"><font color="Snow">HashtagList</font> </a>
                     </li>
 					<li>
-						<a class="glyphicon glyphicon-log-out" href="logout"> Signout </a>
+						<a class="glyphicon glyphicon-log-out" href="{{asset(url('/logout'))}}"> <font color="Snow">Signout </font></a>
 					</li>
 					<li>
-						<a class="glyphicon glyphicon-upload" href="upload">  </a>
+						<a class="glyphicon glyphicon-upload" href="{{asset(url('/upload'))}}">Upload</a>
 					</li>
 					
                 </ul>
@@ -78,9 +78,9 @@
     <div class="container">
 
 <?php
-$a = 1;
-$username = Auth::user()->username;
-$images = Image::where('username','=',$username)->get();
+$a = 1; //variable for break the line
+$username = Auth::user()->username; // get username from user
+$images = Imagea::where('username','=',$username)->get();// get image uploaded by this user
 
 ?>
         <!-- Page Heading -->
@@ -93,17 +93,16 @@ $images = Image::where('username','=',$username)->get();
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 			<p>
-                <h1 class="page-header">{{$username}}
-                    <small>Let's see what you've been uploaded ! Shall we?</small>
+                <h1 class="page-header"><font color="Snow">{{$username}}  </font>
+                    <small><font color="BurlyWood">Let's see what you've been uploaded ! Shall we?</font></small>
                 </h1>
 			</p>
             </div>
         </div>
         <!-- /.row -->
 
-
+<!-- Display uploaded image-->
 @foreach ($images as $image)
-    
         <!-- Projects Row -->
         @if($a%4==1)
         <div class="row">
@@ -112,11 +111,8 @@ $images = Image::where('username','=',$username)->get();
                 <a href="{{url('/history')}}/{{$image->name}}">
                     <img class="img-responsive " src="{{$image->path}}" alt=""> 
                  </a>   
-             <span class="pull-right"><button><a class="glyphicon glyphicon-trash" href = "delete/{{$image->name}}" onCLick="return confirm('Are you SURE you want to delete this record?')" ></button></a></span>   
-             <span class="pull-right"><button><a class="glyphicon glyphicon-thumbs-down" href = "report/{{$image->name}}" onCLick="return confirm('Do you want to report this picture ?')" ></button></a></span>       
-                 
+             <span class="pull-right"><button><a class="glyphicon glyphicon-trash" href = "delete/{{$image->name}}" onCLick="return confirm('Are you SURE you want to delete this record?')" ></button></a></span>           
            </div>
-
         @if($a%4==0)
         </div> 
         @endif
@@ -125,35 +121,6 @@ $images = Image::where('username','=',$username)->get();
         <!-- /.row -->
 
 
-        <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
 
         <hr>
 
@@ -175,8 +142,8 @@ $images = Image::where('username','=',$username)->get();
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+	<body background="uploadpic/background/step.jpg">
 	
-	<body background="cr.jpg">
 </body>
 
 </html>

@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'boss',
+			'database'  => 'stylescout',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'Assignment3ds',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -74,12 +74,12 @@ return array(
 			'schema'   => 'public',
 		),
 
-		'sqlsrv' => array(
+		'sqlsrv ' => array(
 			'driver'   => 'sqlsrv',
-			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
+			'host'     => 'tcp:nx7e64kuhk.database.windows.net,1433',
+			'database' => 'Stylescout',
+			'username' => 'stylescout@nx7e64kuhk',
+			'password' => 'Assignment3ds',
 			'prefix'   => '',
 		),
 

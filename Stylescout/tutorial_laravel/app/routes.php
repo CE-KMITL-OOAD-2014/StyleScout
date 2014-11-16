@@ -10,66 +10,56 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+//return homepage
 Route::get('/',function(){
 	return View::make('index');
 });
- 
+ //log in page
 Route::get('/login',function(){
 	return View::make('signin');
 });
-
+// About us page
+Route::get('/aboutus',function(){
+return View::make('aboutus');
+});
+//register page
 Route::get('/register',function(){
-   
    return View::make('registration');
 });
-
+//upload page
 Route::get('/upload',array(
 	'before' => 'checkAuth',
 	function()
 	{
 	return View::make('uploada');
 }));
-
-
+//history page
 Route::get('history',function(){
 	return View::make('history');
 });
 
-
-Route::get('history/dandy.jpg',function(){
-
-	return View::make('show');
-});
-
-Route::get('delete/{name}','ImageController@delete');
-Route::get('hashtag/{id}','HashtagController@showHashtagPic');
-Route::get('hashtag','HashtagController@getHashtag');
-Route::get('edit','UserController@getEditProfile');
+Route::get('history/{picname}','ImageController@show');  //show picture in history page
+Route::get('delete/{name}','ImageController@delete'); // delete image
+Route::get('deletes/{hashtag}','HashtagController@deleteTag'); // delete hashtag
+Route::get('hashtag/{hashtag}','HashtagController@showHashtagPic'); //access to image by hashtag
+Route::get('hashtag','HashtagController@getHashtag'); //hashtag page
+Route::get('/edit','UserController@getEditProfile'); //edit page
 Route::post('edit','UserController@edit');
-Route::get('/profile','UserController@showProfile');
+Route::get('/profile','UserController@showProfile'); // profile page
+Route::get('/profile/{username}','UserController@getOtherProfile'); //other profile page
 Route::post('upload','ImageController@add');
 Route::post('/registered','UserController@signUp');
 Route::post('login','UserController@login');
-Route::get('/logout','UserController@logout');
-Route::get('report/{name}/','ImageController@report');
+Route::get('/logout','UserController@logout'); //logout
+Route::get('report/{name}/','ReportController@sendReport'); //report image
+Route::get('reportkeep/{name}','ReportController@checkSave'); //make it suite image
+Route::get('reportdel/{name}','ReportController@delete');//delete unsuited image
 
-Route::get('mail/', function()
-{
-
-    $user = 'abc';
-    
-    $data = ['user' => $user];
-
-	Mail::send('test1', $data, function($message) use ($data)
-	{
-		$message->to('aquamade616@gmail.com')->subject('Hello');
-	});
-
-	return 'done';
-	//return View::make('hello');
+Route::get('report',function(){
+return View::make('showreport');
 });
 
-Route::get('portfolio',function(){
+Route::get('portfolio',function()	{
     return View::make('portfolio');
 });
 Route::post('manage','HashtagController@addHashtag');

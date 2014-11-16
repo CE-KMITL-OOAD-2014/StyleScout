@@ -45,7 +45,7 @@
                 </button>
 				
 				
-                <a class="navbar-brand" href="blank.html">STYLESCOUTAPP</a>
+                <a class="navbar-brand">STYLESCOUTAPP</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -54,16 +54,16 @@
                         <a href="profile">Profile </a>
                     </li>
                     <li>
-                        <a href="HashtagList">HashtagList </a>
+                        <a href="hashtag">HashtagList </a>
                     </li>
                     <li>
-                        <a href="About">About</a>
+                        <a href="aboutus">About</a>
                     </li>
 					<li>
 						<a class="glyphicon glyphicon-log-out" href="logout"> Signout </a>
 					</li>
 					<li>
-						<a class="glyphicon glyphicon-upload" href="upload">  </a>
+						<a class="glyphicon glyphicon-upload" href="upload">Upload</a>
 					</li>
                 </ul>
             </div>
@@ -91,19 +91,16 @@
             <div class="col-lg-12">
                 <h2 class="page-header">Categories</h2>
             </div>
-            @foreach($tag as $hashtag)
-
+			<!-- Display all hashtag list-->
+            @foreach($tag as $hashtag) 
             <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="assets/bootstrap/image/upload/dandy.jpg" alt="">
+                <img class="img-circle img-responsive img-center" src="{{$hashtag->pic}}" alt="">
                 <h3>{{$hashtag->hashtag}}
-					<button class="btn" onclick ="window.location='{{url('/hashtag')}}'+'/'+'{{$hashtag->id}}'">{{$hashtag->hashtag}}</button>
-				
+					<button class="btn" onclick ="window.location='{{url('/hashtag')}}'+'/'+'{{$hashtag->hashtag}}'">{{$hashtag->hashtag}}</button>	
                 </h3>
                 <p>{{$hashtag->caption}}</p>
             </div>
-        
-     @endforeach       
-         
+     @endforeach             
         <!-- Footer -->
         <footer>
             <div class="row">

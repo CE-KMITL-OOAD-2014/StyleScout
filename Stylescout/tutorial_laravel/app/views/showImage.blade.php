@@ -13,10 +13,10 @@
     <title></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="assets/bootstrap/css/portfolio-item.css" rel="stylesheet">
+    <link href="{{('assets/bootstrap/css/portfolio-item.css')}}" rel="stylesheet">
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,15 +24,20 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+   <!-- Script for keep text in areabox -->
+	<style type="text/css">
+                    .contain{
+                    width:400px;
+                    background:Red;
+                    }
+                    .hard_break{
+                        word-wrap: break-word; /* Internet Explorer 5.5+ */
+                }
+                </style>
 </head>
 
 <body>
 
-<?php 
-
-$image = Image::where('name','=','dandy.jpg')->first();
-?>
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -55,28 +60,20 @@ $image = Image::where('name','=','dandy.jpg')->first();
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="About.html">About</a>
+ <li>
+                        <a href="{{asset(url('/aboutus'))}}"><font color="Snow">About</font></a>
                     </li>
                     <li>
-                        <a href="profile">Profile </a>
+                        <a href="{{asset(url('/profile'))}}"><font color="Snow">Profile</font></a>
                     </li>
                     <li>
-                         <a href="hashtag">HashtagList </a>
+                         <a href="{{asset(url('/hashtag'))}}"><font color="Snow">HashtagList</font> </a>
                     </li>
 					<li>
-						<a href="history">History </a>
-					</li>
-					
-					<li>
-						<a href="edit">Edit Profile </a>
+						<a class="glyphicon glyphicon-log-out" href="{{asset(url('/logout'))}}"> <font color="Snow">Signout </font></a>
 					</li>
 					<li>
-						<a class="glyphicon glyphicon-upload" href="upload">  </a>
-					</li>
-                    
-					<li>
-						<a class="glyphicon glyphicon-log-out" href="logout"> Signout </a>
+						<a class="glyphicon glyphicon-upload" href="{{asset(url('/upload'))}}">Upload</a>
 					</li>
                 </ul>
             </div>
@@ -84,7 +81,11 @@ $image = Image::where('name','=','dandy.jpg')->first();
         </div>
         <!-- /.container -->
     </nav>
+<?php 
 
+$image = Imagea::where('name','=',$img)->first(); //get image to display
+$relatePic = Imagea::latest('id')->where('hashtag','=',$image->hashtag)->take(4)->get(); // get 4 related image order by hashtag
+?>
     <!-- Page Content -->
     <div class="container">
 
@@ -92,7 +93,9 @@ $image = Image::where('name','=','dandy.jpg')->first();
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">PROFILE
+				    <a href ="{{asset('profile/'.$image->username)}}">
                     <small> {{$image->username}}</small>
+					</a>
                 </h1>
             </div>
         </div>
@@ -102,19 +105,12 @@ $image = Image::where('name','=','dandy.jpg')->first();
         <div class="row">
 
             <div class="col-md-8">
-                <img class="img-responsive" src="{{$image->path}}" alt="">
+                <img class="img-responsive" src="{{asset($image->path)}}" alt="">
             </div>
 
-            <div class="col-md-4">
-                <h3>Profile & Contact</h3>
-                <p>{{$image->caption}}</p>
-                <h3>Details</h3>
-                <ul>
-                    <li>Lorem Ipsum</li>
-                    <li>Dolor Sit Amet</li>
-                    <li>Consectetur</li>
-                    <li>Adipiscing Elit</li>
-                </ul>
+            <div class="col-md-4,hard_contain">
+                <h3>Caption</h3>
+                 <ul>{{$image->caption}}  </ul> <!-- Image caption -->
             </div>
 
         </div>
@@ -127,29 +123,13 @@ $image = Image::where('name','=','dandy.jpg')->first();
                 <h3 class="page-header">Related</h3>
             </div>
 
+            @foreach($relatePic as $relate)    <!--Display Related image-->
             <div class="col-sm-3 col-xs-6">
                 <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="" onclick="window.location='http://localhost:7777/testtest/history.html'">
+                    <img class="img-responsive portfolio-item" src="{{asset($relate->path)}}" alt="" onclick="window.location='{{url('/history')}}/{{$relate->name}}'">
                 </a>
             </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
+         @endforeach
 
         </div>
         <!-- /.row -->
@@ -170,10 +150,10 @@ $image = Image::where('name','=','dandy.jpg')->first();
     <!-- /.container -->
 
     <!-- jQuery Version 1.11.0 -->
-    <script src="assets/bootstrap/js/jquery-1.11.0.js"></script>
+    <script src="{{asset('assets/bootstrap/js/jquery-1.11.0.js')}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
 
 </body>
 

@@ -34,40 +34,26 @@
     </head> 
      
     <body> 
-     
-	  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
+      <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+
+        
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-					<span class="glyphicon glyphicon-log-out"></span>
-					<span class="glyphicon glyphicon-upload"></span>
-
-					
-                </button>
+               
+				
+                <a class="navbar-brand" href="blank">STYLESCOUTAPP</a>
+				<a class="navbar-brand" href="profile">Profile</a>
+				<a class="navbar-brand" href="aboutus">About</a>
 				
 				
-                <a class="navbar-brand" href="blank.html">STYLESCOUTAPP</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="About.html">About</a>
-                    </li>
-                    <li>
-                        <a href="profile">Profile </a>
-                    </li>
-					
-                    
-                </ul>
-            </div>
+			
+            
             <!-- /.navbar-collapse -->
         </div>
+		
         <!-- /.container -->
     </nav>
 
@@ -81,10 +67,10 @@
         </h1>
         <p> 
        
-          <center> <img id="uploadPreview" /></center>
+          <center> <img id="uploadPreview" width = "50%"; height = "auto"; ></center>
           <center> <input id="image" type="file" name="images" onchange="PreviewImage();"  /></center>
             <script type="text/javascript">
-
+<!-- function to preview image -->
     function PreviewImage() {
         var oFReader = new FileReader();
         oFReader.readAsDataURL(document.getElementById("image").files[0]);
@@ -96,8 +82,8 @@
 </script>
         </p> 
     <center>Choose your hashtag: <select name ="hashtag"> 
-    <?php $list = DB::table('hashtag')->lists('hashtag')?>
-   @foreach($list as $lists)
+    <?php $list = DB::table('hashtag')->lists('hashtag')?> <!-- get all hashtag name-->
+   @foreach($list as $lists)  <!-- loop for keep hashtag in the list -->
             <option id = "hashtag" value="{{$lists}}">{{$lists}}</option>
   @endforeach
         </center> </select>

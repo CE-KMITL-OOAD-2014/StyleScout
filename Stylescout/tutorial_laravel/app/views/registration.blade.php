@@ -52,6 +52,7 @@
                 
                 <div class="form-group">
                     <label for="InputPassword">Enter Password</label>
+					<p> Password must have at least 8 characters</p>
                     <div class="input-group">
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>

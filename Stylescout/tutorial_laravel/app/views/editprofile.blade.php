@@ -67,16 +67,16 @@
     <br></br>
 	<center>Contact:<br> <input type="text" name="contact" value="{{$user->contact}}" style="margin:20px; padding:20px; "></center>
 	<p>
-	<center>Bio:<br> <textarea style="resize: none;" rows="4" cols="50" name = "bio" value = "{{$user->bio}}" ></textarea></center>
+	<center>Bio:<br> <textarea style="resize:  none;" rows="4" cols="50" name="bio" >{{$user->bio}}</textarea></center>
 	</p>
 
 <center><p> Choose Profile Picture</p></center>
 
     <p></p>
- <center> <img id="uploadPreview" style /></center>
-          <center> <input id="profilepic" type="file" name="profilepic" value = "{{$user->profile_pic}}" onchange="PreviewImage();" /></center>
+ <center> <img id="uploadPreview" width="50%"; height="auto"; /> </center>
+          <center> <input id="profilepic" type="file" name="profilepic" value ="{{$user->profile_pic}}" onchange="PreviewImage();" /></center>
             <script type="text/javascript">
-
+//function show preview image
     function PreviewImage() {
         var oFReader = new FileReader();
         oFReader.readAsDataURL(document.getElementById("profilepic").files[0]);
@@ -87,15 +87,17 @@
     };
 
 </script>
-<p></p>
+	<p></p>
+	<!--Messages-->
+	<p><center><font color="Maroon">Image file limit at most 2000Kb </font></center></p>
 	<!-- Buttons -->
 	
- 
+	
 	<center><input type="submit" name="submit" id="submit" value="Submit" onclick="window.location='http://localhost:7777/testtest/profile.html'" / class="btn btn-info"><br><br></center>
 	
-	<center><input type="back" name="back" id="back" value="back" onclick="window.location='http://localhost:7777/testtest/profile.html'" / class="btn btn-info"></center>
+
 	</form> 	
-	<body background="gold.jpg">
+	<body background="uploadpic/background/nike.jpg">
 
 
 </body>

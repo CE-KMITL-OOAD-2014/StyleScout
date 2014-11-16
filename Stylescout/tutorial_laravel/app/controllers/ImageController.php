@@ -2,41 +2,42 @@
 
 class ImageController extends BaseController {
 	
-
+//upload image
 protected function add(){
-  
-    
-    $input = Input::file('images');
-     //var_dump(Input::file('image'));
-     //var_dump($input->getRealPath());
-    $image = new Image;
+  $input = Input::all();
+	 $rules = array(
+            'images' => 'image|max:2100'
+        );
+	$v = Validator::make($input, $rules); //check validate
+	if ($v->fails()){
+		return Redirect::to('upload')->withErrors($v); //if fail return to upload page
+	}
+    else{
+    $image = new Imagea;
     $image->username = Auth::user()->username;
     $image->hashtag = Input::get('hashtag');
     $image->caption = Input::get('caption');
-
     $image->name = Input::file('images')->getClientOriginalName();
-    $destinationPath = 'assets/bootstrap/image/upload';
-
-
+    $destinationPath = public_path().'/uploadpic';
     Input::file('images')->move($destinationPath,$image->name);
-    $image->path = $destinationPath.'/'.$image->name;
-
-    $image->save();
-    return Redirect::to('profile');
+    $image->path = "uploadpic/".$image->name;
+	$image->save();
+    return Redirect::to('profile'); //upload success
+	}
 }
-
+// delete image
 protected function delete($name){
-   $new = Image::where('name','=',$name)->first();
+   $new = Imagea::where('name','=',$name)->first();
    $new->delete();
    return Redirect::to('history');
 }
-
-protected function showPicTag(){
-    
+//show image when click
+protected function show($picname){
+    return View::make('showImage')->with('img',$picname);
 }
-
+// report the image
 protected function report($name){
-    $new = Image::where('name','=',$name)->first();
+    $new = Imagea::where('name','=',$name)->first();
     $new->report++;
     var_dump($new->report);
     $new->save();

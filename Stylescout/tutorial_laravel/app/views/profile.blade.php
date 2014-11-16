@@ -24,6 +24,16 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+	<!-- Script for keep text in the areabox -->
+	  <style type="text/css">
+                    .contain{
+                    width:400px;
+                    background:Red;
+                    }
+                    .hard_break{
+                        word-wrap: break-word; /* Internet Explorer 5.5+ */
+                }
+                </style>
 </head>
 
 <body>
@@ -50,7 +60,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="About.html">About</a>
+                        <a href="aboutus">About</a>
                     </li>
                     <li>
                         <a href="profile">Profile </a>
@@ -86,7 +96,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">PROFILE
-                    <small> {{$user->username}}</small>
+                    <small> {{$user->username}} </small>
                 </h1>
             </div>
         </div>
@@ -96,10 +106,10 @@
         <div class="row">
 
             <div class="col-md-8">
-                <img class="img-responsive" src="{{$user->profile_pic}}" alt="">
+                <center><img class="img-responsive" width = "50%"; height = "auto"; src="{{$user->profile_pic}}" alt=""></center>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 , hard_break">
                 <h3>Profile & Contact</h3>
                 <ul>
                 <li>{{$user->contact}}</li>
@@ -114,36 +124,24 @@
         <!-- /.row -->
 
         <!-- Related  Row -->
+		<?php
+		$user = Auth::user()->username; //get user details
+	  $updatePic = Imagea::latest('id')->where('username','=',$user)->take(4)->get(); //get 4 latest image upload
+
+		?>
+		
         <div class="row">
 
             <div class="col-lg-12">
-                <h3 class="page-header">Related</h3>
+                <h3 class="page-header">Lastest Uploaded</h3>
             </div>
-
+         @foreach($updatePic as $update)    <!-- Display latest update pic -->
             <div class="col-sm-3 col-xs-6">
                 <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="" onclick="window.location='http://localhost:7777/testtest/history.html'">
+                    <img class="img-responsive portfolio-item" src="{{$update->path}}" alt="" onclick="window.location='{{url('/history')}}/{{$update->name}}'">
                 </a>
             </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt=""onclick="window.location='http://localhost:7777/testtest/history.html'">
-                </a>
-            </div>
-
+         @endforeach
         </div>
         <!-- /.row -->
 

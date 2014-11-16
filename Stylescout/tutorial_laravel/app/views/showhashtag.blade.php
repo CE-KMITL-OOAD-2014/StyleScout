@@ -13,10 +13,10 @@
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="assets/bootstrap/css/4-col-portfolio.css" rel="stylesheet">
+    <link href="{{asset('assets/bootstrap/css/4-col-portfolio.css')}}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,6 +33,7 @@
    <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
+		
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -46,13 +47,14 @@
 					
                 </button>
 				
-                <a class="navbar-brand" href="blank.html">STYLESCOUTAPP</a>
+                <a class="navbar-brand" href="">STYLESCOUTAPP</a>
+				<a class="navbar-brand" href="{{url('/profile')}}">BACK</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="About.html">About</a>
+                        <a href="{{url('/aboutus')}}">About</a>
                     </li>
                     <li>
                         <a href	="{{url('/profile')}}">Profile</a>
@@ -76,7 +78,7 @@
 
     <!-- Page Content -->
     <div class="container">
-
+			
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
@@ -87,75 +89,46 @@
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 			<p>
-                <h1 class="page-header">{{$tag->hashtag}}
-                    <small>{{$tag->caption}}</small>
+                <h1 class="page-header">{{$thisHash[0]}}
+                    <small>{{$thisCapt[0]}}</small>
                 </h1>
 			</p>
             </div>
         </div>
         <!-- /.row -->
 <?php
-$a = 1;
-$images = Image::where('hashtag','=',$tag->hashtag)->get();
+$a = 1; 
+$i = 0;
+$images = DB::table('images')->where('hashtag','=',$thisHash)->lists('path');
+$relate = DB::table('images')->where('hashtag','=',$thisHash)->lists('name');
 
 ?>
 
-@foreach ($images as $image)
+@foreach($images as $image)
 	
         <!-- Projects Row -->
         @if($a%4==1)
         <div class="row">
         	@endif
            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="{{$image->path}}" alt=""> 
-                    <span class="pull-right"><button><a class="glyphicon glyphicon-trash" href="profile.html"> </button></a></span>
+                <a href="{{url('/history')}}/{{$relate[$i]}}">
+                    <img class="img-responsive" src="{{asset($image)}}"> 
+				            
                 </a>
+				<span class="pull-right"><button><a class="glyphicon glyphicon-thumbs-down" href = "{{asset('report/'.$relate[$i])}}" onCLick="return confirm('Do you want to report this picture ?')" ></button></a></span>
            </div>
 
         @if($a%4==4)
         </div> 
         @endif
-       <?php $a++?>
+       <?php
+       $i++;	   
+	   $a++;
+	   ?>
+       
 @endforeach
 
-        <!-- /.row -->
-
-<!--  -->
-        <!-- /.row -->	
-
   
-
-        <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
-
         <hr>
 
         <!-- Footer -->
@@ -172,12 +145,12 @@ $images = Image::where('hashtag','=',$tag->hashtag)->get();
     <!-- /.container -->
 
     <!-- jQuery Version 1.11.0 -->
-    <script src="js/jquery-1.11.0.js"></script>
+    <script src="{{asset('js/jquery-1.11.0.js')}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
 	
-	<body background="cr.jpg">
+	
 </body>
 
 </html>

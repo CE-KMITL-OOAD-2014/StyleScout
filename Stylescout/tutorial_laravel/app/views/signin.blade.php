@@ -16,7 +16,7 @@
 <div class="container">
 
 <div class="page-header">
-    <h1>Sign in <small>พิมพ์รหัสสิหนู</small></h1>
+    <h1>Sign in</h1>
 </div>
 
 <!-- Simple sigin to App - START -->
@@ -31,7 +31,7 @@
         </div>
 
 		<input type="submit" value="Log in" / class="btn btn-primary btn-lg btn-block">
-        <span><a href="About.html">Need help?</a></span>
+        <span><a href="aboutus">Need help?</a></span>
         <span class="pull-right"><a href="register">New Registration</a></span>
 
 
